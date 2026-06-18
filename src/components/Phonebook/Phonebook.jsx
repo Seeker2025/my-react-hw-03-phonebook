@@ -20,6 +20,19 @@ export class Phonebook extends React.Component{
     number: '',
             }
 
+    componentDidMount(){
+    const todos = localStorage.getItem('con');
+    const parsedTodos = JSON.parse(todos);
+
+    if(parsedTodos){
+        this.setState({contacts: parsedTodos })
+      }
+    }   
+    componentDidUpdate( prevState ){
+    if(this.state.contacts !== prevState.contact);
+    localStorage.setItem('con', JSON.stringify(this.state.contacts));
+    }     
+
     toFilter = () => {
     return this.state.contacts.filter(contact =>
         contact.name
